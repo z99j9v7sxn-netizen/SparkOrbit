@@ -1,0 +1,15 @@
+{
+  "id": "binary-search",
+  "title": "二分查找",
+  "planet_keywords": ["二分", "binary search", "有序数组", "查找", "数组"],
+  "structure": "array",
+  "language": "python",
+  "code": "def binary_search(a, target):\n    lo, hi = 0, len(a) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if a[mid] == target:\n            return mid\n        if a[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1\n\nbinary_search([1, 3, 5, 7, 9], 7)\n",
+  "initial": {"bars": [1, 3, 5, 7, 9], "highlight": []},
+  "steps": [
+    {"line": 9, "action": "start", "narrate": "有序数组 [1,3,5,7,9]，查找 target=7", "vars": {"target": 7, "lo": 0, "hi": 4}, "stack": ["binary_search"], "bars": [1, 3, 5, 7, 9], "highlight": [0, 4], "predict": {"question": "首轮 mid=(0+4)//2=2，a[2]=5，下一步应？", "options": [{"key": "A", "text": "搜右半（lo=mid+1）"}, {"key": "B", "text": "搜左半（hi=mid-1）"}, {"key": "C", "text": "直接返回"}, {"key": "D", "text": "扩大区间"}], "answer": "A"}},
+    {"line": 3, "action": "compare", "narrate": "mid=2，a[2]=5 < 7，搜索右半", "vars": {"mid": 2, "a[mid]": 5}, "stack": ["binary_search"], "bars": [1, 3, 5, 7, 9], "highlight": [2], "predict": {"question": "lo=3,hi=4 时 mid 为？", "options": [{"key": "A", "text": "3"}, {"key": "B", "text": "4"}, {"key": "C", "text": "2"}, {"key": "D", "text": "0"}], "answer": "A"}},
+    {"line": 3, "action": "compare", "narrate": "lo=3,hi=4；mid=3，a[3]=7 == target，命中", "vars": {"mid": 3, "lo": 3, "hi": 4}, "stack": ["binary_search"], "bars": [1, 3, 5, 7, 9], "highlight": [3]},
+    {"line": 5, "action": "done", "narrate": "返回下标 3。每轮将区间减半，复杂度 O(log n)", "vars": {"index": 3}, "stack": ["binary_search"], "bars": [1, 3, 5, 7, 9], "highlight": [3]}
+  ]
+}

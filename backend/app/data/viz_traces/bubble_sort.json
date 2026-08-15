@@ -1,0 +1,17 @@
+{
+  "id": "bubble-sort",
+  "title": "冒泡排序",
+  "planet_keywords": ["排序", "冒泡", "bubble", "数组"],
+  "structure": "array",
+  "language": "python",
+  "code": "def bubble(a):\n    n = len(a)\n    for i in range(n):\n        for j in range(0, n - i - 1):\n            if a[j] > a[j + 1]:\n                a[j], a[j + 1] = a[j + 1], a[j]\n    return a\n\nbubble([5, 1, 4, 2])\n",
+  "initial": {"bars": [5, 1, 4, 2], "highlight": []},
+  "steps": [
+    {"line": 8, "action": "start", "narrate": "待排序数组 [5,1,4,2]", "vars": {"a": "[5,1,4,2]"}, "stack": ["<module>"], "bars": [5, 1, 4, 2], "highlight": [], "predict": {"question": "比较 5 与 1 并交换后，数组会变成？", "options": [{"key": "A", "text": "[1, 5, 4, 2]"}, {"key": "B", "text": "[5, 1, 4, 2]"}, {"key": "C", "text": "[1, 4, 5, 2]"}, {"key": "D", "text": "[2, 4, 1, 5]"}], "answer": "A"}},
+    {"line": 5, "action": "compare", "narrate": "比较 5 与 1：5>1，交换", "vars": {"j": 0}, "stack": ["bubble"], "bars": [1, 5, 4, 2], "highlight": [0, 1]},
+    {"line": 5, "action": "compare", "narrate": "比较 5 与 4：5>4，交换", "vars": {"j": 1}, "stack": ["bubble"], "bars": [1, 4, 5, 2], "highlight": [1, 2]},
+    {"line": 5, "action": "compare", "narrate": "比较 5 与 2：5>2，交换；本轮最大值 5 沉底", "vars": {"j": 2}, "stack": ["bubble"], "bars": [1, 4, 2, 5], "highlight": [2, 3]},
+    {"line": 5, "action": "compare", "narrate": "第二轮：4 与 2 交换", "vars": {"i": 1, "j": 1}, "stack": ["bubble"], "bars": [1, 2, 4, 5], "highlight": [1, 2]},
+    {"line": 7, "action": "done", "narrate": "已有序 [1,2,4,5]。冒泡每一轮把未排序区间最大值推到右侧", "vars": {}, "stack": ["bubble"], "bars": [1, 2, 4, 5], "highlight": [0, 1, 2, 3]}
+  ]
+}

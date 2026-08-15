@@ -1,0 +1,97 @@
+{
+  "id": "dfs-traverse",
+  "title": "深度优先搜索 DFS",
+  "planet_keywords": ["图", "DFS", "深度", "深度优先", "遍历"],
+  "structure": "graph",
+  "algo": "dfs",
+  "language": "python",
+  "code": "def dfs(graph, start):\n    visited = set()\n    stack = [start]\n    order = []\n    while stack:\n        u = stack.pop()\n        if u in visited:\n            continue\n        visited.add(u)\n        order.append(u)\n        for v in reversed(graph.get(u, [])):\n            if v not in visited:\n                stack.append(v)\n    return order\n\ngraph = {'A': ['B', 'C'], 'B': ['D', 'E'], 'C': ['E'], 'D': [], 'E': []}\ndfs(graph, 'A')\n",
+  "initial": {
+    "start": "A",
+    "algo": "dfs",
+    "nodes": [
+      {"id": "A", "label": "A", "x": 0.15, "y": 0.5},
+      {"id": "B", "label": "B", "x": 0.45, "y": 0.25},
+      {"id": "C", "label": "C", "x": 0.45, "y": 0.75},
+      {"id": "D", "label": "D", "x": 0.75, "y": 0.15},
+      {"id": "E", "label": "E", "x": 0.85, "y": 0.5}
+    ],
+    "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]]
+  },
+  "steps": [
+    {
+      "line": 1,
+      "narrate": "图结构就绪，从起点 A 开始 DFS（栈）",
+      "vars": {"start": "A"},
+      "stack": ["dfs"],
+      "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}],
+      "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]],
+      "highlight": ["A"],
+      "predict": {
+        "question": "DFS 用栈，从 A 将邻居 B、C 压栈（B 后入），下一步弹出的是？",
+        "options": [
+          {"key": "A", "text": "B"},
+          {"key": "B", "text": "C"},
+          {"key": "C", "text": "D"},
+          {"key": "D", "text": "E"}
+        ],
+        "answer": "B"
+      }
+    },
+    {
+      "line": 4,
+      "narrate": "弹出 A，访问 A；将邻居 B、C 压栈（后进先出，B 在栈顶）",
+      "vars": {"current": "A", "stack": "['C','B']"},
+      "stack": ["dfs"],
+      "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}],
+      "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]],
+      "highlight": ["A", "A-B", "A-C"],
+      "predict": {
+        "question": "访问 A 后下一跳会深入哪条支路？",
+        "options": [
+          {"key": "A", "text": "先深入后压入的 B 支路"},
+          {"key": "B", "text": "先深入先压入的 C 支路"},
+          {"key": "C", "text": "同时访问 B 与 C"},
+          {"key": "D", "text": "立刻结束"}
+        ],
+        "answer": "A"
+      }
+    },
+    {
+      "line": 4,
+      "narrate": "弹出 B，访问 B；将未访问邻居 D、E 压栈",
+      "vars": {"current": "B", "stack": "['C','E','D']"},
+      "stack": ["dfs"],
+      "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}],
+      "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]],
+      "highlight": ["B", "B-D", "B-E"]
+    },
+    {
+      "line": 4,
+      "narrate": "弹出 D，访问 D；无未访问邻居",
+      "vars": {"current": "D"},
+      "stack": ["dfs"],
+      "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}],
+      "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]],
+      "highlight": ["D"]
+    },
+    {
+      "line": 4,
+      "narrate": "弹出 E，访问 E；继续处理栈中剩余节点",
+      "vars": {"current": "E"},
+      "stack": ["dfs"],
+      "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}],
+      "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]],
+      "highlight": ["E"]
+    },
+    {
+      "line": 4,
+      "narrate": "弹出 C，访问 C；E 已访问，跳过。DFS 完成，访问序 A→B→D→E→C",
+      "vars": {"order": "['A','B','D','E','C']"},
+      "stack": ["dfs"],
+      "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}],
+      "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]],
+      "highlight": ["C", "A", "B", "D", "E"]
+    }
+  ]
+}

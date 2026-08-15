@@ -1,0 +1,21 @@
+{
+  "id": "bst-insert",
+  "title": "二叉搜索树插入",
+  "planet_keywords": ["二叉树", "BST", "二叉搜索树", "binary"],
+  "structure": "tree",
+  "language": "python",
+  "code": "class Node:\n    def __init__(self, v):\n        self.v, self.l, self.r = v, None, None\n\ndef insert(root, x):\n    if root is None:\n        return Node(x)\n    if x < root.v:\n        root.l = insert(root.l, x)\n    elif x > root.v:\n        root.r = insert(root.r, x)\n    return root\n\nroot = None\nfor x in [8, 3, 10, 1, 6]:\n    root = insert(root, x)\n",
+  "initial": {"nodes": [], "edges": [], "highlight": []},
+  "steps": [
+    {"line": 14, "action": "start", "narrate": "准备依次插入 8,3,10,1,6", "vars": {"seq": "[8,3,10,1,6]"}, "stack": ["<module>"], "nodes": [], "edges": [], "highlight": [], "predict": {"question": "空树插入第一个值 8 后，根节点是？", "options": [{"key": "A", "text": "8"}, {"key": "B", "text": "3"}, {"key": "C", "text": "10"}, {"key": "D", "text": "无根"}], "answer": "A"}},
+    {"line": 5, "action": "insert", "narrate": "树空，创建根节点 8", "vars": {"x": 8}, "stack": ["insert"], "nodes": [{"id": "8", "label": "8", "x": 0.5, "y": 0.15}], "edges": [], "highlight": ["8"]},
+    {"line": 7, "action": "compare", "narrate": "插入 3：3 < 8，走向左子树", "vars": {"x": 3, "root": 8}, "stack": ["insert"], "nodes": [{"id": "8", "label": "8", "x": 0.5, "y": 0.15}], "edges": [], "highlight": ["8"], "predict": {"question": "接着插入 10，应挂在根的哪一侧？", "options": [{"key": "A", "text": "右子树"}, {"key": "B", "text": "左子树"}, {"key": "C", "text": "替换根"}, {"key": "D", "text": "作为 3 的右孩子"}], "answer": "A"}},
+    {"line": 5, "action": "insert", "narrate": "左子树为空，挂上节点 3", "vars": {"x": 3}, "stack": ["insert", "insert"], "nodes": [{"id": "8", "label": "8", "x": 0.5, "y": 0.15}, {"id": "3", "label": "3", "x": 0.28, "y": 0.4}], "edges": [["8", "3"]], "highlight": ["3"]},
+    {"line": 9, "action": "compare", "narrate": "插入 10：10 > 8，走向右子树", "vars": {"x": 10, "root": 8}, "stack": ["insert"], "nodes": [{"id": "8", "label": "8", "x": 0.5, "y": 0.15}, {"id": "3", "label": "3", "x": 0.28, "y": 0.4}], "edges": [["8", "3"]], "highlight": ["8"]},
+    {"line": 5, "action": "insert", "narrate": "右子树为空，挂上节点 10", "vars": {"x": 10}, "stack": ["insert", "insert"], "nodes": [{"id": "8", "label": "8", "x": 0.5, "y": 0.15}, {"id": "3", "label": "3", "x": 0.28, "y": 0.4}, {"id": "10", "label": "10", "x": 0.72, "y": 0.4}], "edges": [["8", "3"], ["8", "10"]], "highlight": ["10"]},
+    {"line": 7, "action": "compare", "narrate": "插入 1：1 < 8 → 左，再 1 < 3 → 左", "vars": {"x": 1}, "stack": ["insert", "insert"], "nodes": [{"id": "8", "label": "8", "x": 0.5, "y": 0.15}, {"id": "3", "label": "3", "x": 0.28, "y": 0.4}, {"id": "10", "label": "10", "x": 0.72, "y": 0.4}], "edges": [["8", "3"], ["8", "10"]], "highlight": ["3"]},
+    {"line": 5, "action": "insert", "narrate": "挂上叶子 1，左链延伸完成", "vars": {"x": 1}, "stack": ["insert"], "nodes": [{"id": "8", "label": "8", "x": 0.5, "y": 0.15}, {"id": "3", "label": "3", "x": 0.28, "y": 0.4}, {"id": "10", "label": "10", "x": 0.72, "y": 0.4}, {"id": "1", "label": "1", "x": 0.15, "y": 0.65}], "edges": [["8", "3"], ["8", "10"], ["3", "1"]], "highlight": ["1"]},
+    {"line": 7, "action": "compare", "narrate": "插入 6：6 < 8 → 左，6 > 3 → 右", "vars": {"x": 6}, "stack": ["insert", "insert"], "nodes": [{"id": "8", "label": "8", "x": 0.5, "y": 0.15}, {"id": "3", "label": "3", "x": 0.28, "y": 0.4}, {"id": "10", "label": "10", "x": 0.72, "y": 0.4}, {"id": "1", "label": "1", "x": 0.15, "y": 0.65}], "edges": [["8", "3"], ["8", "10"], ["3", "1"]], "highlight": ["3"]},
+    {"line": 5, "action": "done", "narrate": "挂上 6。BST 插入完成：左小右大始终成立", "vars": {"x": 6}, "stack": ["insert"], "nodes": [{"id": "8", "label": "8", "x": 0.5, "y": 0.15}, {"id": "3", "label": "3", "x": 0.28, "y": 0.4}, {"id": "10", "label": "10", "x": 0.72, "y": 0.4}, {"id": "1", "label": "1", "x": 0.15, "y": 0.65}, {"id": "6", "label": "6", "x": 0.4, "y": 0.65}], "edges": [["8", "3"], ["8", "10"], ["3", "1"], ["3", "6"]], "highlight": ["6"]}
+  ]
+}

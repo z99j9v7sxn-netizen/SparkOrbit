@@ -1,0 +1,28 @@
+{
+  "id": "dijkstra-shortest",
+  "title": "Dijkstra 最短路",
+  "planet_keywords": ["最短路", "Dijkstra", "图", "最短路径", "加权图"],
+  "structure": "graph",
+  "algo": "dijkstra",
+  "language": "python",
+  "code": "import heapq\n\ndef dijkstra(graph, start, target):\n    dist = {start: 0}\n    pq = [(0, start)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if u == target:\n            return d\n        for v, w in graph.get(u, []):\n            nd = d + w\n            if nd < dist.get(v, float('inf')):\n                dist[v] = nd\n                heapq.heappush(pq, (nd, v))\n    return dist.get(target, float('inf'))\n\ngraph = {'S': [('A', 4), ('B', 2)], 'A': [('T', 3)], 'B': [('A', 1), ('T', 5)], 'T': []}\ndijkstra(graph, 'S', 'T')\n",
+  "initial": {
+    "start": "S",
+    "target": "T",
+    "algo": "dijkstra",
+    "nodes": [
+      {"id": "S", "label": "S", "x": 0.12, "y": 0.5},
+      {"id": "B", "label": "B", "x": 0.38, "y": 0.75},
+      {"id": "A", "label": "A", "x": 0.55, "y": 0.25},
+      {"id": "T", "label": "T", "x": 0.88, "y": 0.5}
+    ],
+    "edges": [["S", "B", 2], ["S", "A", 4], ["B", "A", 1], ["B", "T", 5], ["A", "T", 3]]
+  },
+  "steps": [
+    {"line": 1, "narrate": "加权图就绪，从 S 到 T 求最短路", "vars": {"start": "S", "target": "T"}, "stack": ["dijkstra"], "nodes": [{"id": "S", "label": "S", "x": 0.12, "y": 0.5}, {"id": "B", "label": "B", "x": 0.38, "y": 0.75}, {"id": "A", "label": "A", "x": 0.55, "y": 0.25}, {"id": "T", "label": "T", "x": 0.88, "y": 0.5}], "edges": [["S", "B", 2], ["S", "A", 4], ["B", "A", 1], ["B", "T", 5], ["A", "T", 3]], "highlight": ["S"], "predict": {"question": "从 S 出发，优先队列会先弹出哪个邻居？", "options": [{"key": "A", "text": "B（权重 2）"}, {"key": "B", "text": "A（权重 4）"}, {"key": "C", "text": "T"}, {"key": "D", "text": "任意"}], "answer": "A"}},
+    {"line": 4, "narrate": "弹出 S(dist=0)；松弛 S→B(2)、S→A(4)", "vars": {"current": "S", "dist": "{'S':0,'B':2,'A':4}"}, "stack": ["dijkstra"], "nodes": [{"id": "S", "label": "S", "x": 0.12, "y": 0.5}, {"id": "B", "label": "B", "x": 0.38, "y": 0.75}, {"id": "A", "label": "A", "x": 0.55, "y": 0.25}, {"id": "T", "label": "T", "x": 0.88, "y": 0.5}], "edges": [["S", "B", 2], ["S", "A", 4], ["B", "A", 1], ["B", "T", 5], ["A", "T", 3]], "highlight": ["S", "S-B", "S-A"], "predict": {"question": "经 B 松弛后，A 的距离会变成？", "options": [{"key": "A", "text": "3（2+1）"}, {"key": "B", "text": "仍为 4"}, {"key": "C", "text": "5"}, {"key": "D", "text": "7"}], "answer": "A"}},
+    {"line": 4, "narrate": "弹出 B(dist=2)；松弛 B→A 为 3，B→T 为 7", "vars": {"current": "B", "dist": "{'B':2,'A':3,'T':7}"}, "stack": ["dijkstra"], "nodes": [{"id": "S", "label": "S", "x": 0.12, "y": 0.5}, {"id": "B", "label": "B", "x": 0.38, "y": 0.75}, {"id": "A", "label": "A", "x": 0.55, "y": 0.25}, {"id": "T", "label": "T", "x": 0.88, "y": 0.5}], "edges": [["S", "B", 2], ["S", "A", 4], ["B", "A", 1], ["B", "T", 5], ["A", "T", 3]], "highlight": ["B", "B-A", "B-T"]},
+    {"line": 4, "narrate": "弹出 A(dist=3)；松弛 A→T 为 6，优于经 B 的 7", "vars": {"current": "A", "dist": "{'A':3,'T':6}"}, "stack": ["dijkstra"], "nodes": [{"id": "S", "label": "S", "x": 0.12, "y": 0.5}, {"id": "B", "label": "B", "x": 0.38, "y": 0.75}, {"id": "A", "label": "A", "x": 0.55, "y": 0.25}, {"id": "T", "label": "T", "x": 0.88, "y": 0.5}], "edges": [["S", "B", 2], ["S", "A", 4], ["B", "A", 1], ["B", "T", 5], ["A", "T", 3]], "highlight": ["A", "A-T"]},
+    {"line": 4, "narrate": "弹出 T(dist=6)；到达目标。最短路 S→B→A→T，权重 2+1+3=6", "vars": {"answer": 6, "path": "S-B-A-T"}, "stack": ["dijkstra"], "nodes": [{"id": "S", "label": "S", "x": 0.12, "y": 0.5}, {"id": "B", "label": "B", "x": 0.38, "y": 0.75}, {"id": "A", "label": "A", "x": 0.55, "y": 0.25}, {"id": "T", "label": "T", "x": 0.88, "y": 0.5}], "edges": [["S", "B", 2], ["S", "A", 4], ["B", "A", 1], ["B", "T", 5], ["A", "T", 3]], "highlight": ["T", "S-B", "B-A", "A-T"]}
+  ]
+}

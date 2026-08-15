@@ -1,0 +1,29 @@
+{
+  "id": "bfs-traverse",
+  "title": "广度优先搜索 BFS",
+  "planet_keywords": ["图", "BFS", "广度", "广度优先", "遍历"],
+  "structure": "graph",
+  "algo": "bfs",
+  "language": "python",
+  "code": "from collections import deque\n\ndef bfs(graph, start):\n    visited = set([start])\n    q = deque([start])\n    order = []\n    while q:\n        u = q.popleft()\n        order.append(u)\n        for v in graph.get(u, []):\n            if v not in visited:\n                visited.add(v)\n                q.append(v)\n    return order\n\ngraph = {'A': ['B', 'C'], 'B': ['D', 'E'], 'C': ['E'], 'D': [], 'E': []}\nbfs(graph, 'A')\n",
+  "initial": {
+    "start": "A",
+    "algo": "bfs",
+    "nodes": [
+      {"id": "A", "label": "A", "x": 0.15, "y": 0.5},
+      {"id": "B", "label": "B", "x": 0.45, "y": 0.25},
+      {"id": "C", "label": "C", "x": 0.45, "y": 0.75},
+      {"id": "D", "label": "D", "x": 0.75, "y": 0.15},
+      {"id": "E", "label": "E", "x": 0.85, "y": 0.5}
+    ],
+    "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]]
+  },
+  "steps": [
+    {"line": 1, "narrate": "图结构就绪，从起点 A 开始 BFS", "vars": {"start": "A"}, "stack": ["bfs"], "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}], "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]], "highlight": ["A"], "predict": {"question": "BFS 用队列，从 A 出发下一层会先访问哪些节点？", "options": [{"key": "A", "text": "B 与 C"}, {"key": "B", "text": "仅 D"}, {"key": "C", "text": "D 与 E"}, {"key": "D", "text": "仅 E"}], "answer": "A"}},
+    {"line": 4, "narrate": "出队 A，访问 A；将邻居 B、C 入队", "vars": {"current": "A", "queue": "['B','C']"}, "stack": ["bfs"], "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}], "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]], "highlight": ["A", "A-B", "A-C"], "predict": {"question": "队列队头是 B，出队后会把谁入队？", "options": [{"key": "A", "text": "D 与 E"}, {"key": "B", "text": "仅 C"}, {"key": "C", "text": "A"}, {"key": "D", "text": "无"}], "answer": "A"}},
+    {"line": 4, "narrate": "出队 B，访问 B；将未访问邻居 D、E 入队", "vars": {"current": "B", "queue": "['C','D','E']"}, "stack": ["bfs"], "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}], "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]], "highlight": ["B", "B-D", "B-E"]},
+    {"line": 4, "narrate": "出队 C，访问 C；E 已入队，跳过", "vars": {"current": "C"}, "stack": ["bfs"], "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}], "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]], "highlight": ["C", "C-E"]},
+    {"line": 4, "narrate": "出队 D，访问 D；无未访问邻居", "vars": {"current": "D"}, "stack": ["bfs"], "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}], "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]], "highlight": ["D"]},
+    {"line": 4, "narrate": "出队 E，访问 E；BFS 完成，访问序 A→B→C→D→E", "vars": {"order": "['A','B','C','D','E']"}, "stack": ["bfs"], "nodes": [{"id": "A", "label": "A", "x": 0.15, "y": 0.5}, {"id": "B", "label": "B", "x": 0.45, "y": 0.25}, {"id": "C", "label": "C", "x": 0.45, "y": 0.75}, {"id": "D", "label": "D", "x": 0.75, "y": 0.15}, {"id": "E", "label": "E", "x": 0.85, "y": 0.5}], "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "E"]], "highlight": ["E", "A", "B", "C", "D", "E"]}
+  ]
+}

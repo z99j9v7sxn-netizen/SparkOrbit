@@ -1,0 +1,251 @@
+{
+  "status": "ok",
+  "generated_at": "2026-08-12T14:19:02.809198+00:00",
+  "generator": "scripts/generate_local_harness_report.py",
+  "project": "SparkOrbit",
+  "overall_score": 100,
+  "note": "本地扫描 15/15 项已观察；官方 CLI 可用 scripts/run_better_harness.ps1",
+  "dimensions": [
+    {
+      "id": "agent_obs",
+      "label": "Agent 可观测",
+      "score": 90,
+      "evidence_state": "observed",
+      "note": "Runs/Steps 落库与 AdminAgents"
+    },
+    {
+      "id": "auth",
+      "label": "鉴权会话",
+      "score": 85,
+      "evidence_state": "observed",
+      "note": "JWT + 登录/WS"
+    },
+    {
+      "id": "teaching",
+      "label": "教学闭环",
+      "score": 80,
+      "evidence_state": "observed",
+      "note": "衰减复习 / 闭环 / 教师工具"
+    },
+    {
+      "id": "migrations",
+      "label": "迁移基线",
+      "score": 85,
+      "evidence_state": "observed",
+      "note": "alembic upgrade head 建全表"
+    },
+    {
+      "id": "evidence",
+      "label": "证据包",
+      "score": 100,
+      "evidence_state": "observed",
+      "note": "docs/evidence/better-harness"
+    }
+  ],
+  "findings": [
+    {
+      "id": "AGENTS_md",
+      "title": "Agent 边界与验收约定",
+      "priority": "low",
+      "dimension": "agent_obs",
+      "cause": "已落盘：AGENTS.md",
+      "expected": "仓库根有 AGENTS.md，写明 mode 与验收",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: AGENTS.md",
+      "evidence_state": "observed",
+      "path": "AGENTS.md",
+      "acceptance": "`AGENTS.md` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_app_services_agent_trace_py",
+      "title": "AgentRun/Step 落库",
+      "priority": "low",
+      "dimension": "agent_obs",
+      "cause": "已落盘：backend/app/services/agent_trace.py",
+      "expected": "agent_runs / agent_steps 可按 user_id 查询",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/app/services/agent_trace.py",
+      "evidence_state": "observed",
+      "path": "backend/app/services/agent_trace.py",
+      "acceptance": "`backend/app/services/agent_trace.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_app_services_resource_agents_py",
+      "title": "资源工坊 workflow",
+      "priority": "low",
+      "dimension": "agent_obs",
+      "cause": "已落盘：backend/app/services/resource_agents.py",
+      "expected": "C2 三组 DAG 并行并写 AgentStep",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/app/services/resource_agents.py",
+      "evidence_state": "observed",
+      "path": "backend/app/services/resource_agents.py",
+      "acceptance": "`backend/app/services/resource_agents.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_app_services_simulation_py",
+      "title": "镜像 handoff / council",
+      "priority": "low",
+      "dimension": "agent_obs",
+      "cause": "已落盘：backend/app/services/simulation.py",
+      "expected": "handoff/council 写 AgentStep",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/app/services/simulation.py",
+      "evidence_state": "observed",
+      "path": "backend/app/services/simulation.py",
+      "acceptance": "`backend/app/services/simulation.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_app_services_companion_supervisor_py",
+      "title": "伴学 supervisor",
+      "priority": "low",
+      "dimension": "agent_obs",
+      "cause": "已落盘：backend/app/services/companion_supervisor.py",
+      "expected": "supervise 意图→路径/资源/闪卡",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/app/services/companion_supervisor.py",
+      "evidence_state": "observed",
+      "path": "backend/app/services/companion_supervisor.py",
+      "acceptance": "`backend/app/services/companion_supervisor.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_app_services_memory_decay_py",
+      "title": "遗忘衰减与复习派发",
+      "priority": "low",
+      "dimension": "teaching",
+      "cause": "已落盘：backend/app/services/memory_decay.py",
+      "expected": "scan_and_dispatch_reviews 可派发 DailyTask",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/app/services/memory_decay.py",
+      "evidence_state": "observed",
+      "path": "backend/app/services/memory_decay.py",
+      "acceptance": "`backend/app/services/memory_decay.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_app_services_teacher_extras_py",
+      "title": "教师学情 / CSV",
+      "priority": "low",
+      "dimension": "teaching",
+      "cause": "已落盘：backend/app/services/teacher_extras.py",
+      "expected": "roster import 与 grades export",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/app/services/teacher_extras.py",
+      "evidence_state": "observed",
+      "path": "backend/app/services/teacher_extras.py",
+      "acceptance": "`backend/app/services/teacher_extras.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_app_core_security_py",
+      "title": "JWT / 密码哈希",
+      "priority": "low",
+      "dimension": "auth",
+      "cause": "已落盘：backend/app/core/security.py",
+      "expected": "create_access_token / resolve_user_id_from_token",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/app/core/security.py",
+      "evidence_state": "observed",
+      "path": "backend/app/core/security.py",
+      "acceptance": "`backend/app/core/security.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_alembic_versions_20260812_0001_baseline_py",
+      "title": "Alembic 全量基线",
+      "priority": "low",
+      "dimension": "migrations",
+      "cause": "已落盘：backend/alembic/versions/20260812_0001_baseline.py",
+      "expected": "upgrade() 用 metadata.create_all",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/alembic/versions/20260812_0001_baseline.py",
+      "evidence_state": "observed",
+      "path": "backend/alembic/versions/20260812_0001_baseline.py",
+      "acceptance": "`backend/alembic/versions/20260812_0001_baseline.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "frontend_src_views_admin_AdminAgents_vue",
+      "title": "管理端 Agent 回放",
+      "priority": "low",
+      "dimension": "agent_obs",
+      "cause": "已落盘：frontend/src/views/admin/AdminAgents.vue",
+      "expected": "/admin/agents 可筛 mode/status/user",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: frontend/src/views/admin/AdminAgents.vue",
+      "evidence_state": "observed",
+      "path": "frontend/src/views/admin/AdminAgents.vue",
+      "acceptance": "`frontend/src/views/admin/AdminAgents.vue` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "frontend_src_views_admin_AdminHarness_vue",
+      "title": "Harness 只读页",
+      "priority": "low",
+      "dimension": "evidence",
+      "cause": "已落盘：frontend/src/views/admin/AdminHarness.vue",
+      "expected": "五维图 + Cause/Expected/Repair 卡片",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: frontend/src/views/admin/AdminHarness.vue",
+      "evidence_state": "observed",
+      "path": "frontend/src/views/admin/AdminHarness.vue",
+      "acceptance": "`frontend/src/views/admin/AdminHarness.vue` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "frontend_src_components_teacher_GatePolicyPanel_vue",
+      "title": "闸门策略与复习扫描",
+      "priority": "low",
+      "dimension": "teaching",
+      "cause": "已落盘：frontend/src/components/teacher/GatePolicyPanel.vue",
+      "expected": "GatePolicyPanel 触发 review-scan",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: frontend/src/components/teacher/GatePolicyPanel.vue",
+      "evidence_state": "observed",
+      "path": "frontend/src/components/teacher/GatePolicyPanel.vue",
+      "acceptance": "`frontend/src/components/teacher/GatePolicyPanel.vue` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_app_services_learning_loop_py",
+      "title": "评估→路径→资源闭环",
+      "priority": "low",
+      "dimension": "teaching",
+      "cause": "已落盘：backend/app/services/learning_loop.py",
+      "expected": "closed-loop/run 可一键补强",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/app/services/learning_loop.py",
+      "evidence_state": "observed",
+      "path": "backend/app/services/learning_loop.py",
+      "acceptance": "`backend/app/services/learning_loop.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_tests_test_jwt_auth_py",
+      "title": "JWT 单测",
+      "priority": "low",
+      "dimension": "auth",
+      "cause": "已落盘：backend/tests/test_jwt_auth.py",
+      "expected": "test_jwt_auth 通过",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/tests/test_jwt_auth.py",
+      "evidence_state": "observed",
+      "path": "backend/tests/test_jwt_auth.py",
+      "acceptance": "`backend/tests/test_jwt_auth.py` 存在且可被管理端/CI 引用"
+    },
+    {
+      "id": "backend_tests_test_closed_loop_py",
+      "title": "闭环意图单测",
+      "priority": "low",
+      "dimension": "teaching",
+      "cause": "已落盘：backend/tests/test_closed_loop.py",
+      "expected": "test_closed_loop 通过",
+      "repair": "保持现状；随功能演进更新证据。",
+      "summary": "已落盘: backend/tests/test_closed_loop.py",
+      "evidence_state": "observed",
+      "path": "backend/tests/test_closed_loop.py",
+      "acceptance": "`backend/tests/test_closed_loop.py` 存在且可被管理端/CI 引用"
+    }
+  ],
+  "feedforward": [
+    "cd backend && alembic upgrade head",
+    "python scripts/generate_local_harness_report.py",
+    "pwsh scripts/run_better_harness.ps1"
+  ],
+  "notes": [
+    "本报告由仓库本地扫描生成，可被 /admin/harness 直接展示。",
+    "若需官方 Qoder Better Harness CLI，执行 scripts/run_better_harness.ps1。"
+  ]
+}

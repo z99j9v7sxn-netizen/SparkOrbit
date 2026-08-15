@@ -1,0 +1,13 @@
+.env
+.venv
+__pycache__
+*.pyc
+*.pyo
+chroma_data
+*.db
+.idea
+.git
+uploads/**
+!uploads/.gitkeep
+app/static/media/generated/**
+!app/static/media/generated/.gitkeep

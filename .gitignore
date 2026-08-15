@@ -1,0 +1,30 @@
+.env
+backend/.env
+frontend/node_modules/
+frontend/dist/
+.venv/
+__pycache__/
+*.pyc
+*.db
+backend/chroma_data/
+backend/data/resource_runs/
+backend/app/static/media/generated/*
+!backend/app/static/media/generated/.gitkeep
+submit/
+backups/
+*.log
+.DS_Store
+# 腾讯云 SSL（勿提交私钥）
+certs/
+!certs/.gitkeep
+
+# 每用户 Obsidian 兼容知识库
+backend/vaults/
+
+# Better Harness 源码克隆（产物在 docs/evidence/better-harness）
+tools/better-harness/
+
+# IDE / 测试缓存
+.idea/
+**/.pytest_cache/
+
