@@ -1,6 +1,6 @@
 # SparkOrbit 星轨学图
 
-第十五届「中国软件杯」A3 赛题作品：多智能体协同的个性化资源生成与学习系统。
+多智能体协同的个性化资源生成与学习系统。
 
 技术栈：Vue 3 + Vite + FastAPI + MySQL（可 SQLite 兜底）+ ChromaDB。
 
